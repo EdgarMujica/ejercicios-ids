@@ -1,0 +1,53 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="lista-elem">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <ul>
+        <li on-click="datos" id="C1" dataId="US" dataDialCode="1">USA</li>
+        <li on-click="datos" id="C2" dataId="CA" dataDialCode="1">Canada</li>
+        <li on-click="datos"id="C3" dataId="FF" dataDialCode="3">Francia</li>
+    </ul>
+  </template>
+
+  <script>
+    /**
+     * `lista-elem`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ListaElem extends Polymer.Element {
+      static get is() { return 'lista-elem'; }
+      static get properties() {
+        return {
+   
+        };
+      }
+
+     
+
+      datos(e){
+      
+      let  customEvt = new CustomEvent('evt-lista',{
+        bubbles:true,
+        composed:true,
+        detail:e.path[0].attributes
+      }); 
+      this.dispatchEvent(customEvt);
+     
+      let datos = e.path[0].attributes;
+      alert(datos.id.nodeValue+" "+datos.dataid.nodeValue+" "+datos.datadialcode.nodeValue);
+      console.log(customEvt.detail);
+      }
+    }
+
+    window.customElements.define(ListaElem.is, ListaElem);
+  </script>
+</dom-module>
